@@ -1,6 +1,8 @@
+#include "chip8.h"
 #include "framebuffer.h"
 #include "gfx.h"
 #include <stdint.h>
+#include <stdio.h>
 
 #include "raylib.h"
 // clang-format off
@@ -23,10 +25,12 @@ int main(void) {
 	struct renderer_t *renderer;
 	renderer_init(&renderer, screenWidth, screenHeight, &fb);
 
-	framebuffer_fill_color(&fb, 255);
-	framebuffer_draw_image(&fb, 80, 40, 5, image_0);
+	chip8_state_t state;
+	chip8_state_init(&state, &fb);
+	chip8_load_rom_file(&state, "./output.ch8");
 
 	while (!WindowShouldClose()) {
+		chip8_step(&state);
 		renderer_draw_framebuffer(renderer, &fb);
 	}
 
