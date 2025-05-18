@@ -16,8 +16,8 @@ void framebuffer_free(framebuffer_t *fb);
 int framebuffer_get(framebuffer_t *fb, uint8_t x, uint8_t y, uint8_t *value);
 int framebuffer_set(framebuffer_t *fb, uint8_t x, uint8_t y, uint8_t value);
 
-void framebuffer_draw_image(framebuffer_t *fb, uint8_t x, uint8_t y,
-							uint8_t nbytes, uint8_t *image_data);
+uint8_t framebuffer_draw_image(framebuffer_t *fb, uint8_t x, uint8_t y,
+							   uint8_t nbytes, uint8_t *image_data);
 
 void framebuffer_dump_ascii(const framebuffer_t *fb);
 void _framebuffer_debug_chessboard(framebuffer_t *fb);

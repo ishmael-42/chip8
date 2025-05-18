@@ -64,8 +64,11 @@ static inline uint8_t get_nth_bit(uint8_t byte, uint8_t n) {
 	return (byte >> (7 - n)) & 1;
 }
 
-void framebuffer_draw_image(framebuffer_t *fb, uint8_t x, uint8_t y,
-							uint8_t nbytes, uint8_t *image_data) {
+uint8_t framebuffer_draw_image(framebuffer_t *fb, uint8_t x, uint8_t y,
+							   uint8_t nbytes, uint8_t *image_data) {
+
+	uint8_t collision_happened = 0;
+
 	for (int yy = 0; yy < nbytes; yy++) {
 		uint8_t current_byte = image_data[yy];
 		for (int xx = 0; xx < 8; xx++) {
@@ -74,9 +77,14 @@ void framebuffer_draw_image(framebuffer_t *fb, uint8_t x, uint8_t y,
 			framebuffer_get(fb, x + xx, y + yy, &original_pixel);
 
 			framebuffer_set(fb, x + xx, y + yy, image_pixel ^ original_pixel);
+
+			// VF flag.
+			// See http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#Dxyn
+			if (image_pixel + original_pixel == 2)
+				collision_happened = 1;
 		}
 	}
-	return;
+	return collision_happened;
 }
 
 void _framebuffer_debug_chessboard(framebuffer_t *fb) {
