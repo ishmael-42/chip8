@@ -1,7 +1,6 @@
 #include "framebuffer.h"
 #include "gfx.h"
 #include <stdint.h>
-#include <string.h>
 
 #include "raylib.h"
 // clang-format off
@@ -21,13 +20,14 @@ int main(void) {
 	framebuffer_t fb;
 	framebuffer_init(&fb, 64, 32);
 
-	renderer_t renderer;
+	struct renderer_t *renderer;
 	renderer_init(&renderer, screenWidth, screenHeight, &fb);
-	framebuffer_draw_image(&fb, 20, 20, 5, image_0);
+
 	_framebuffer_debug_fill_color(&fb, 255);
+	framebuffer_draw_image(&fb, 80, 40, 5, image_0);
 
 	while (!WindowShouldClose()) {
-		renderer_draw_framebuffer(&renderer, &fb);
+		renderer_draw_framebuffer(renderer, &fb);
 	}
 
 	CloseWindow();
