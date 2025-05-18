@@ -72,15 +72,21 @@ uint8_t framebuffer_draw_image(framebuffer_t *fb, uint8_t x, uint8_t y,
 	for (int yy = 0; yy < nbytes; yy++) {
 		uint8_t current_byte = image_data[yy];
 		for (int xx = 0; xx < 8; xx++) {
-			uint8_t original_pixel, image_pixel;
-			image_pixel = get_nth_bit(current_byte, xx) ? 255 : 0;
-			framebuffer_get(fb, x + xx, y + yy, &original_pixel);
 
-			framebuffer_set(fb, x + xx, y + yy, image_pixel ^ original_pixel);
+			uint8_t target_x, target_y;
+			target_x = (x + xx) % fb->width;
+			target_y = (y + yy) % fb->height;
+
+			uint8_t original_pixel, image_pixel, result_pixel;
+			image_pixel = get_nth_bit(current_byte, xx) ? 255 : 0;
+			framebuffer_get(fb, target_x, target_y, &original_pixel);
+			result_pixel = image_pixel ^ original_pixel;
+
+			framebuffer_set(fb, target_x, target_y, result_pixel);
 
 			// VF flag.
 			// See http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#Dxyn
-			if (image_pixel + original_pixel == 2)
+			if (image_pixel && original_pixel)
 				collision_happened = 1;
 		}
 	}
