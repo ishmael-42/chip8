@@ -1,3 +1,6 @@
+#ifndef INCLUDE_CHIP8_INSTRUCTIONS_H
+#define INCLUDE_CHIP8_INSTRUCTIONS_H
+
 #include "chip8.h"
 #include <stdint.h>
 
@@ -32,3 +35,5 @@ int RANDOM(chip8_state_t *state, chip8_opcode opcode);
 int SKP_KEY(chip8_state_t *state, chip8_opcode opcode);
 int SKNP_KEY(chip8_state_t *state, chip8_opcode opcode);
 int WAIT_FOR_K(chip8_state_t *state, chip8_opcode opcode);
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef _CHIP8_H
+#define _CHIP8_H
+
 #include "framebuffer.h"
 #include <stdint.h>
 
@@ -27,3 +30,5 @@ static inline uint16_t chip8_opcode_nnn(chip8_opcode op)  { return  op &  0x0FFF
 // clang-format on
 
 void chip8_state_init(chip8_state_t *state, framebuffer_t *fb);
+
+#endif
