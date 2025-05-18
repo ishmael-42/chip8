@@ -1,4 +1,8 @@
 #include "chip8_instructions.h"
+#include "chip8.h"
+#include "framebuffer.h"
+#include <stddef.h>
+#include <stdint.h>
 
 /*
  * An instruction is a function, that takes in the current chip8 state, and
@@ -327,3 +331,24 @@ int WAIT_FOR_K(chip8_state_t *state, chip8_opcode_t opcode) {
 	return 0;
 }
 
+// Dxyn - DRW Vx, Vy, nibble
+
+int DRW(chip8_state_t *state, chip8_opcode_t opcode) {
+
+	uint8_t x = chip8_opcode_x(opcode);
+	uint8_t y = chip8_opcode_y(opcode);
+	uint8_t n = chip8_opcode_n(opcode);
+
+	uint8_t *sprite_start_location = state->memory + (size_t)state->I;
+
+	uint8_t x_pos = state->V[x];
+	uint8_t y_pos = state->V[y];
+
+	// uint8_t did_overwrite =
+	// framebuffer_draw_image(state->fb, x, y, n, sprite_start_location);
+	uint8_t did_overwrite = framebuffer_draw_image(state->fb, x_pos, y_pos, n,
+												   sprite_start_location);
+
+	state->V[0xF] = did_overwrite;
+	return 0;
+}
