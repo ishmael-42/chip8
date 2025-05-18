@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int framebuffer_init(framebuffer_t *fb, int width, int height) {
+int framebuffer_init(framebuffer_t *fb, uint8_t width, uint8_t height) {
 	if (!fb || width <= 0 || height <= 0)
 		return -1;
 
@@ -24,7 +24,7 @@ void framebuffer_free(framebuffer_t *fb) {
 	fb->pixels = NULL;
 }
 
-int framebuffer_set(framebuffer_t *fb, int x, int y, uint8_t value) {
+int framebuffer_set(framebuffer_t *fb, uint8_t x, uint8_t y, uint8_t value) {
 	if (!fb || !fb->pixels || x < 0 || y < 0 || x >= fb->width ||
 		y >= fb->height)
 		return -1;
@@ -33,7 +33,7 @@ int framebuffer_set(framebuffer_t *fb, int x, int y, uint8_t value) {
 	return 0;
 }
 
-int framebuffer_get(framebuffer_t *fb, int x, int y, uint8_t *value) {
+int framebuffer_get(framebuffer_t *fb, uint8_t x, uint8_t y, uint8_t *value) {
 	if (!fb || !fb->pixels || !value || x < 0 || y < 0 || x >= fb->width ||
 		y >= fb->height)
 		return -1;
