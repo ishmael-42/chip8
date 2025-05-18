@@ -31,6 +31,7 @@ FetchContent_MakeAvailable(raylib)
 set(SOURCE_FILES
     src/main.c
     src/framebuffer.c
+    src/gfx.c
 )
 add_executable(chip8 ${SOURCE_FILES})
 
