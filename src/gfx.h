@@ -9,7 +9,7 @@ typedef struct renderer_t {
 	Rectangle framebufferRect, displayRect;
 } renderer_t;
 
-void renderer_init(renderer_t *render, uint8_t screen_width,
-				   uint8_t screen_height, const framebuffer_t *fb);
+void renderer_init(renderer_t *render, const uint64_t screen_width,
+				   const uint64_t screen_height, const framebuffer_t *fb);
 
 void renderer_draw_framebuffer(renderer_t *render, const framebuffer_t *fb);

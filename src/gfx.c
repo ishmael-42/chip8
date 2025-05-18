@@ -1,9 +1,10 @@
 #include "gfx.h"
 #include "framebuffer.h"
 #include "raylib.h"
+#include <stdint.h>
 
-void renderer_init(renderer_t *render, uint8_t screen_width,
-				   uint8_t screen_height, const framebuffer_t *fb) {
+void renderer_init(renderer_t *render, const uint64_t screen_width,
+				   const uint64_t screen_height, const framebuffer_t *fb) {
 
 	InitWindow(screen_width, screen_height, "test raylib");
 	SetTargetFPS(60);
