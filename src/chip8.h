@@ -31,5 +31,6 @@ static inline uint16_t chip8_opcode_nnn(chip8_opcode_t op)  { return  op &  0x0F
 
 void chip8_state_init(chip8_state_t *state, framebuffer_t *fb);
 void chip8_load_rom_file(chip8_state_t *state, const char *file_name);
+void chip8_step(chip8_state_t *state);
 
 #endif
