@@ -1,0 +1,23 @@
+#ifndef FRAMEBUFFER_H
+#define FRAMEBUFFER_H
+
+#include <stdint.h>
+
+typedef struct {
+	int width;
+	int height;
+	uint8_t *pixels;
+} framebuffer_t;
+
+int framebuffer_init(framebuffer_t *fb, int framebuffer_width,
+					 int framebuffer_height);
+void framebuffer_free(framebuffer_t *fb);
+
+int framebuffer_get(framebuffer_t *fb, int x, int y, uint8_t *value);
+int framebuffer_set(framebuffer_t *fb, int x, int y, uint8_t value);
+
+void framebuffer_dump_ascii(const framebuffer_t *fb);
+
+void _framebuffer_debug_chessboard(framebuffer_t *fb);
+
+#endif // FRAMEBUFFER_H

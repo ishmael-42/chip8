@@ -28,7 +28,10 @@ FetchContent_MakeAvailable(raylib)
 
 FetchContent_MakeAvailable(raylib)
 
-set(SOURCE_FILES src/main.c)
+set(SOURCE_FILES
+    src/main.c
+    src/framebuffer.c
+)
 add_executable(chip8 ${SOURCE_FILES})
 
 target_link_libraries(chip8 PUBLIC raylib)
