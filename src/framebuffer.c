@@ -1,4 +1,5 @@
 #include "framebuffer.h"
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -57,6 +58,27 @@ void framebuffer_dump_ascii(const framebuffer_t *fb) {
 	}
 }
 
+static inline uint8_t get_nth_bit(uint8_t byte, uint8_t n) {
+	if (n > 7)
+		return 0; // out of range for uint8_t
+	return (byte >> (7 - n)) & 1;
+}
+
+void framebuffer_draw_image(framebuffer_t *fb, uint8_t x, uint8_t y,
+							uint8_t nbytes, uint8_t *image_data) {
+	for (int yy = 0; yy < nbytes; yy++) {
+		uint8_t current_byte = image_data[yy];
+		for (int xx = 0; xx < 8; xx++) {
+			uint8_t original_pixel, image_pixel;
+			image_pixel = get_nth_bit(current_byte, xx) ? 255 : 0;
+			framebuffer_get(fb, x + xx, y + yy, &original_pixel);
+
+			framebuffer_set(fb, x + xx, y + yy, image_pixel ^ original_pixel);
+		}
+	}
+	return;
+}
+
 void _framebuffer_debug_chessboard(framebuffer_t *fb) {
 
 	int paint = 0;
@@ -67,5 +89,13 @@ void _framebuffer_debug_chessboard(framebuffer_t *fb) {
 			paint = !paint;
 		}
 		paint = !paint;
+	}
+}
+
+void _framebuffer_debug_fill_color(framebuffer_t *fb, uint8_t color) {
+	for (int y = 0; y < fb->height; y++) {
+		for (int x = 0; x < fb->width; x++) {
+			framebuffer_set(fb, x, y, color);
+		}
 	}
 }

@@ -21,5 +21,6 @@ void framebuffer_draw_image(framebuffer_t *fb, uint8_t x, uint8_t y,
 
 void framebuffer_dump_ascii(const framebuffer_t *fb);
 void _framebuffer_debug_chessboard(framebuffer_t *fb);
+void _framebuffer_debug_fill_color(framebuffer_t *fb, uint8_t color);
 
 #endif // FRAMEBUFFER_H
