@@ -106,7 +106,7 @@ void _framebuffer_debug_chessboard(framebuffer_t *fb) {
 	}
 }
 
-void _framebuffer_debug_fill_color(framebuffer_t *fb, uint8_t color) {
+void framebuffer_fill_color(framebuffer_t *fb, uint8_t color) {
 	for (int y = 0; y < fb->height; y++) {
 		for (int x = 0; x < fb->width; x++) {
 			framebuffer_set(fb, x, y, color);

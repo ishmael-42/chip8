@@ -23,7 +23,7 @@ int main(void) {
 	struct renderer_t *renderer;
 	renderer_init(&renderer, screenWidth, screenHeight, &fb);
 
-	_framebuffer_debug_fill_color(&fb, 255);
+	framebuffer_fill_color(&fb, 255);
 	framebuffer_draw_image(&fb, 80, 40, 5, image_0);
 
 	while (!WindowShouldClose()) {
