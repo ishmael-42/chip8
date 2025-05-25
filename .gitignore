@@ -1,4 +1,6 @@
 .cache
 build
+guild
+wild
 .ignore
 compile_commands.json

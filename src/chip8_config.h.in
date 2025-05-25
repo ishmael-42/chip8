@@ -1,0 +1,5 @@
+// config.h.in — template
+
+#pragma once
+
+#cmakedefine USE_RAYLIB

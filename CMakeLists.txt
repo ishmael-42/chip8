@@ -17,6 +17,7 @@ set(BUILD_GAMES OFF CACHE BOOL "" FORCE)
 # Don't pull git repo. instead, download source code as zip, and extract it :thumbs:
 # https://github.com/raysan5/raylib/archive/refs/tags/5.5.zip
 
+option(USE_RAYLIB "Use raylib instead of glfw/glad " OFF)
 FetchContent_Declare(
     raylib
     URL https://github.com/raysan5/raylib/archive/refs/tags/5.5.zip
@@ -24,9 +25,13 @@ FetchContent_Declare(
         SHA256=00e8a7c85f7a5221e56ee8e4e1c6642b773eae73d29379a91c8ac5149e803f42
 )
 
-FetchContent_MakeAvailable(raylib)
 
-FetchContent_MakeAvailable(raylib)
+if(USE_RAYLIB)
+    FetchContent_MakeAvailable(raylib)
+    set(gfx_backend raylib)
+endif()
+
+configure_file(src/chip8_config.h.in chip8_config.h)
 
 set(SOURCE_FILES
     src/main.c
@@ -34,7 +39,8 @@ set(SOURCE_FILES
     src/gfx.c
     src/chip8.c
     src/chip8_instructions.c
+    src/window_ctx.c
 )
 add_executable(chip8 ${SOURCE_FILES})
-
-target_link_libraries(chip8 PUBLIC raylib)
+target_link_libraries(chip8 PUBLIC ${gfx_backend})
+target_include_directories(chip8 PRIVATE ${CMAKE_BINARY_DIR})

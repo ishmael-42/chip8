@@ -1,12 +1,11 @@
 #include "chip8.h"
 #include "chip8_instructions.h"
+#include "chip8_numbers.h"
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#define htobe16(x) __bswap_16(x)
 
 void chip8_state_init(chip8_state_t *state, framebuffer_t *fb) {
 	state->memory = calloc(4096, sizeof(uint8_t));
@@ -17,6 +16,8 @@ void chip8_state_init(chip8_state_t *state, framebuffer_t *fb) {
 	memset(state->stack, 0x00, 0x10);
 	state->sp = 0x00;
 	memset(state->keyboard, 0x00, 0x10);
+
+	memcpy(state->memory, chip8_digits, sizeof(chip8_digits));
 
 	state->fb = fb;
 };
