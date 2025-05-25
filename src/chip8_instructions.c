@@ -17,7 +17,6 @@
 /*
  * ======== PENDING INSTRUCTIONS =========
  *
- * Dxyn - DRW Vx, Vy, nibble
  * Fx07 - LD Vx, DT
  * Fx15 - LD DT, Vx
  * Fx18 - LD ST, Vx

@@ -16,7 +16,7 @@ uint8_t image_0[] = {
 };
 // clang-format on
 
-int main(void) {
+int main(int argc, char *argv[argc + 1]) {
 	const int screenWidth = 960;
 	const int screenHeight = 960 / 2;
 
@@ -31,7 +31,7 @@ int main(void) {
 
 	chip8_state_t state;
 	chip8_state_init(&state, &fb);
-	chip8_load_rom_file(&state, "./output.ch8");
+	chip8_load_rom_file(&state, argv[1]);
 
 	while (!window_ctx_should_stop_loop(window_ctx)) {
 		chip8_step(&state);

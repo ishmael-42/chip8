@@ -10,11 +10,10 @@ struct renderer_t {
 };
 
 void renderer_init(struct renderer_t **renderr, const uint64_t screen_width,
-				   const uint64_t screen_height, const framebuffer_t *fb) {
+                   const uint64_t screen_height, const framebuffer_t *fb) {
 
-	InitWindow(screen_width, screen_height, "test raylib");
-	SetTargetFPS(60);
-
+	// we take care of the rendering timeline manually.
+	SetTargetFPS(0);
 	struct renderer_t *render = calloc(sizeof(struct renderer_t), 1);
 	*renderr = render;
 
@@ -27,28 +26,28 @@ void renderer_init(struct renderer_t **renderr, const uint64_t screen_width,
 	render->renderTexture = LoadTextureFromImage(bwImage);
 
 	render->framebufferRect = (Rectangle){
-		.x = 0.0f,
-		.y = 0.0f,
-		.width = fb->width,
-		.height = fb->height,
+	    .x = 0.0f,
+	    .y = 0.0f,
+	    .width = fb->width,
+	    .height = fb->height,
 	};
 
 	render->displayRect = (Rectangle){
-		.x = 0.0f,
-		.y = 0.0f,
-		.width = screen_width,
-		.height = screen_height,
+	    .x = 0.0f,
+	    .y = 0.0f,
+	    .width = screen_width,
+	    .height = screen_height,
 	};
 }
 
 void renderer_draw_framebuffer(struct renderer_t *render,
-							   const framebuffer_t *fb) {
+                               const framebuffer_t *fb) {
 	BeginDrawing();
 
 	UpdateTexture(render->renderTexture, fb->pixels);
 	Vector2 origin = {0.0, 0.0};
 	DrawTexturePro(render->renderTexture, render->framebufferRect,
-				   render->displayRect, origin, 0.0, WHITE);
+	               render->displayRect, origin, 0.0, WHITE);
 
 	EndDrawing();
 }
