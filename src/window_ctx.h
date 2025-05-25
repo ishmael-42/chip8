@@ -11,4 +11,7 @@ void window_ctx_denit(struct window_ctx_t *);
 int window_ctx_set_key_state(struct window_ctx_t *, chip8_state_t *state);
 int window_ctx_should_stop_loop(struct window_ctx_t *);
 
+int window_ctx_swap_buffers(struct window_ctx_t *);
+int window_ctx_poll_events(struct window_ctx_t *);
+
 #endif // !WINDOW_CTX

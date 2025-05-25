@@ -39,8 +39,6 @@ inline static int is_key_pressed(GLFWwindow *window, int key) {
 int window_ctx_set_key_state(struct window_ctx_t *window_ctx,
                              chip8_state_t *state) {
 
-	glfwPollEvents();
-
 	memset(state->keyboard, 0x00, 0x10);
 
 	// clang-format off
@@ -71,4 +69,14 @@ int window_ctx_set_key_state(struct window_ctx_t *window_ctx,
 
 int window_ctx_should_stop_loop(struct window_ctx_t *window_ctx) {
 	return glfwWindowShouldClose(window_ctx->window);
+}
+
+int window_ctx_swap_buffers(struct window_ctx_t *window_ctx) {
+	glfwSwapBuffers(window_ctx->window);
+	return 0;
+}
+
+int window_ctx_poll_events(struct window_ctx_t *window) {
+	glfwPollEvents();
+	return 0;
 }

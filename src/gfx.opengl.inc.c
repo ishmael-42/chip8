@@ -175,6 +175,4 @@ void renderer_draw_framebuffer(IN struct renderer_t *render,
 	glBindVertexArray(0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glUseProgram(0);
-
-	glfwSwapBuffers(glfwGetCurrentContext());
 }

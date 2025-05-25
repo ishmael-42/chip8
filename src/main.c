@@ -33,9 +33,11 @@ int main(int argc, char *argv[argc + 1]) {
 	chip8_load_rom_file(&state, argv[1]);
 
 	while (!window_ctx_should_stop_loop(window_ctx)) {
+		window_ctx_poll_events(window_ctx);
 		window_ctx_set_key_state(window_ctx, &state);
 		chip8_step(&state);
 		renderer_draw_framebuffer(renderer, &fb);
+		window_ctx_swap_buffers(window_ctx);
 	}
 
 	window_ctx_denit(window_ctx);
