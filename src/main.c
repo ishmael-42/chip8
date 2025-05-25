@@ -1,6 +1,7 @@
 #include "chip8.h"
 #include "framebuffer.h"
 #include "gfx.h"
+#include "window_ctx.h"
 #include <stdint.h>
 #include <stdio.h>
 
@@ -17,7 +18,10 @@ uint8_t image_0[] = {
 
 int main(void) {
 	const int screenWidth = 960;
-	const int screenHeight = 540;
+	const int screenHeight = 960 / 2;
+
+	struct window_ctx_t *window_ctx =
+	    window_ctx_init(screenWidth, screenHeight, "Hahaha");
 
 	framebuffer_t fb;
 	framebuffer_init(&fb, 64, 32);
@@ -29,12 +33,12 @@ int main(void) {
 	chip8_state_init(&state, &fb);
 	chip8_load_rom_file(&state, "./output.ch8");
 
-	while (!WindowShouldClose()) {
+	while (!window_ctx_should_stop_loop(window_ctx)) {
 		chip8_step(&state);
 		renderer_draw_framebuffer(renderer, &fb);
 	}
 
-	CloseWindow();
+	window_ctx_denit();
 
 	return 0;
 }
