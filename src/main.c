@@ -1,11 +1,10 @@
 #include "chip8.h"
+#include "every.h"
 #include "framebuffer.h"
 #include "gfx.h"
 #include "window_ctx.h"
 #include <stdint.h>
-#include <stdio.h>
 
-#include "raylib.h"
 // clang-format off
 uint8_t image_0[] = {
 	0b11110000,
@@ -34,11 +33,12 @@ int main(int argc, char *argv[argc + 1]) {
 	chip8_load_rom_file(&state, argv[1]);
 
 	while (!window_ctx_should_stop_loop(window_ctx)) {
+		window_ctx_set_key_state(window_ctx, &state);
 		chip8_step(&state);
 		renderer_draw_framebuffer(renderer, &fb);
 	}
 
-	window_ctx_denit();
+	window_ctx_denit(window_ctx);
 
 	return 0;
 }

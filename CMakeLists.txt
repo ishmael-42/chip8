@@ -14,9 +14,6 @@ set(FETCHCONTENT_QUIET FALSE)
 set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(BUILD_GAMES OFF CACHE BOOL "" FORCE)
 
-# Don't pull git repo. instead, download source code as zip, and extract it :thumbs:
-# https://github.com/raysan5/raylib/archive/refs/tags/5.5.zip
-
 option(USE_RAYLIB "Use raylib instead of glfw/glad " OFF)
 FetchContent_Declare(
     raylib
@@ -25,10 +22,24 @@ FetchContent_Declare(
         SHA256=00e8a7c85f7a5221e56ee8e4e1c6642b773eae73d29379a91c8ac5149e803f42
 )
 
+FetchContent_Declare(
+    glfw
+    GIT_REPOSITORY https://github.com/glfw/glfw.git
+    GIT_TAG master
+)
+FetchContent_Declare(
+    glad
+    GIT_REPOSITORY https://codeberg.org/ishmael/glad-33-core-debug.git
+    GIT_TAG master
+)
 
 if(USE_RAYLIB)
     FetchContent_MakeAvailable(raylib)
     set(gfx_backend raylib)
+else()
+    FetchContent_MakeAvailable(glfw)
+    FetchContent_MakeAvailable(glad)
+    set(gfx_backend glad glfw)
 endif()
 
 configure_file(src/chip8_config.h.in chip8_config.h)

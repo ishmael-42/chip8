@@ -1,5 +1,7 @@
 #include "chip8_config.h"
 
-#ifndef RENDER_BACKEND
+#ifdef USE_RAYLIB
 #include "gfx.raylib.inc.c"
+#else
+#include "gfx.opengl.inc.c"
 #endif
