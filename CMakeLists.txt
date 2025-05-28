@@ -42,7 +42,7 @@ else()
     set(gfx_backend glad glfw)
 endif()
 
-configure_file(src/chip8_config.h.in chip8_config.h)
+configure_file(src/chip8_config.h.in ${CMAKE_BINARY_DIR}/chip8_config.h)
 
 set(SOURCE_FILES
     src/main.c

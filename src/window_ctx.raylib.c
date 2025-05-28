@@ -54,3 +54,13 @@ int window_ctx_set_key_state(struct window_ctx_t *_window_ctx,
 int window_ctx_should_stop_loop(struct window_ctx_t *_window_ctx) {
 	return WindowShouldClose();
 };
+
+int window_ctx_swap_buffers(struct window_ctx_t *window_ctx) {
+	// no-op coz raylib does that for us.
+	return 0;
+}
+
+int window_ctx_poll_events(struct window_ctx_t *window) {
+	// no-op coz raylib does that for us.
+	return 0;
+}
