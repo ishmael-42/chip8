@@ -47,7 +47,7 @@ static int NOT_IMPLEMENTED(chip8_state_t *state, chip8_opcode_t opcode) {
 	return -1;
 }
 
-int _forward_instruction(chip8_state_t *state, chip8_opcode_t opcode) {
+static int _forward_instruction(chip8_state_t *state, chip8_opcode_t opcode) {
 	uint8_t op_high = (opcode & 0xF000) >> 12;
 	uint8_t x = (opcode & 0x0F00) >> 8;
 	uint8_t y = (opcode & 0x00F0) >> 4;
@@ -107,10 +107,10 @@ int _forward_instruction(chip8_state_t *state, chip8_opcode_t opcode) {
 
 		case 0xF:
 			switch (kk) {
-				case 0x07: return NOT_IMPLEMENTED(state, opcode); // LD Vx, DT
+				case 0x07: return LD_VX_DT(state, opcode); // LD Vx, DT
 				case 0x0A: return WAIT_FOR_K(state, opcode);
-				case 0x15: return NOT_IMPLEMENTED(state, opcode); // LD DT, Vx
-				case 0x18: return NOT_IMPLEMENTED(state, opcode); // LD ST, Vx
+				case 0x15: return LD_DT_VX(state, opcode); // LD DT, Vx
+				case 0x18: return LD_ST_VX(state, opcode); // LD ST, Vx
 				case 0x1E: return ADD_I(state, opcode);
 				case 0x29: return LD_FONT(state, opcode);
 				case 0x33: return LD_BCD(state, opcode);

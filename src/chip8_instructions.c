@@ -14,17 +14,6 @@
  *
  */
 
-/*
- * ======== PENDING INSTRUCTIONS =========
- *
- * Fx07 - LD Vx, DT
- * Fx15 - LD DT, Vx
- * Fx18 - LD ST, Vx
- * 0nnn - SYS addr
- *
- * ======== PENDING INSTRUCTIONS =========
- */
-
 // 6xkk - LD Vx, byte
 int LOAD_IMMEDIATE(chip8_state_t *state, chip8_opcode_t opcode) {
 	uint8_t x = chip8_opcode_x(opcode);
@@ -118,7 +107,6 @@ int ADD_I(chip8_state_t *state, chip8_opcode_t opcode) {
 }
 
 // Fx29 - LD F, Vx
-// TODO: Add fonts to the chip8 memory
 int LD_FONT(chip8_state_t *state, chip8_opcode_t opcode) {
 	uint8_t x = chip8_opcode_x(opcode);
 	uint8_t digit = state->V[x];
@@ -346,8 +334,29 @@ int DRW(chip8_state_t *state, chip8_opcode_t opcode) {
 	// uint8_t did_overwrite =
 	// framebuffer_draw_image(state->fb, x, y, n, sprite_start_location);
 	uint8_t did_overwrite = framebuffer_draw_image(state->fb, x_pos, y_pos, n,
-												   sprite_start_location);
+	                                               sprite_start_location);
 
 	state->V[0xF] = did_overwrite;
+	return 0;
+}
+
+// Fx07 - LD Vx, DT
+int LD_VX_DT(chip8_state_t *state, chip8_opcode_t opcode) {
+	uint8_t x = chip8_opcode_x(opcode);
+	state->V[x] = state->dt;
+	return 0;
+}
+
+// Fx15 - LD DT, Vx
+int LD_DT_VX(chip8_state_t *state, chip8_opcode_t opcode) {
+	uint8_t x = chip8_opcode_x(opcode);
+	state->dt = state->V[x];
+	return 0;
+}
+
+// Fx18 - LD ST, Vx
+int LD_ST_VX(chip8_state_t *state, chip8_opcode_t opcode) {
+	uint8_t x = chip8_opcode_x(opcode);
+	state->st = state->V[x];
 	return 0;
 }

@@ -36,5 +36,8 @@ int SKP_KEY(chip8_state_t *state, chip8_opcode_t opcode);
 int SKNP_KEY(chip8_state_t *state, chip8_opcode_t opcode);
 int WAIT_FOR_K(chip8_state_t *state, chip8_opcode_t opcode);
 int DRW(chip8_state_t *state, chip8_opcode_t opcode);
+int LD_VX_DT(chip8_state_t *state, chip8_opcode_t opcode);
+int LD_DT_VX(chip8_state_t *state, chip8_opcode_t opcode);
+int LD_ST_VX(chip8_state_t *state, chip8_opcode_t opcode);
 
 #endif
