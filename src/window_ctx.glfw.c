@@ -27,7 +27,7 @@ struct window_ctx_t *window_ctx_init(int window_width, int window_height,
 	return window_ctx;
 }
 
-void window_ctx_denit(struct window_ctx_t *window_ctx) {
+void window_ctx_deinit(struct window_ctx_t *window_ctx) {
 	glfwDestroyWindow(window_ctx->window);
 	glfwTerminate();
 }

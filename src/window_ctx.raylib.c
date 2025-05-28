@@ -12,7 +12,7 @@ struct window_ctx_t *window_ctx_init(int window_width, int window_height,
 	return dummy;
 }
 
-void window_ctx_denit(struct window_ctx_t *_window_ctx) {
+void window_ctx_deinit(struct window_ctx_t *_window_ctx) {
 	CloseWindow();
 }
 
