@@ -51,6 +51,8 @@ set(SOURCE_FILES
     src/chip8.c
     src/chip8_instructions.c
     src/window_ctx.c
+    src/every.c
+    src/chip8_time.c
 )
 add_executable(chip8 ${SOURCE_FILES})
 target_link_libraries(chip8 PUBLIC ${gfx_backend})

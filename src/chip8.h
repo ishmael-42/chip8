@@ -21,6 +21,8 @@ typedef struct chip8_state_t {
 	uint8_t keyboard[0x10];
 
 	framebuffer_t *fb;
+
+	uint8_t dt, st;
 } chip8_state_t;
 
 typedef uint16_t chip8_opcode_t;
@@ -38,4 +40,6 @@ void chip8_state_init(chip8_state_t *state, framebuffer_t *fb);
 void chip8_load_rom_file(chip8_state_t *state, const char *file_name);
 void chip8_step(chip8_state_t *state);
 
+void chip8_decrement_dt(chip8_state_t *state);
+void chip8_decrement_st(chip8_state_t *state);
 #endif

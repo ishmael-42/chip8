@@ -150,3 +150,10 @@ void chip8_step(chip8_state_t *state) {
 
 	return;
 }
+
+void chip8_decrement_dt(chip8_state_t *state) {
+	state->dt -= 1;
+}
+void chip8_decrement_st(chip8_state_t *state) {
+	state->st -= 1;
+}
